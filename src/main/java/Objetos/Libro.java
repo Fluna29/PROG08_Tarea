@@ -111,6 +111,6 @@ public class Libro {
      */
     @Override
     public String toString(){
-        return("Datos Libro {ISBN: " + getIsbn() + " | Título: " + getTitulo() + " | Año Publicación: " + getAnyoPublicacion() + " | Autor: " + getAutor() + " | Género: " + getGenero() + " | Sinopsis: " + getSinopsis() + " }");
+        return("Datos Libro {ISBN: " + getIsbn() + " | Título: " + getTitulo() + " | Año Publicación: " + getAnyoPublicacion() + " | Autor: " + autor.toString() + " | Género: " + getGenero() + " | Sinopsis: " + getSinopsis() + " }");
     }
 }

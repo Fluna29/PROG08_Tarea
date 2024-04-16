@@ -46,6 +46,6 @@ public class Persona {
      */
     @Override
     public String toString(){
-        return("Datos Autor {Nombre: " + getNombre() + " | Apellidos" + getApellidos() +" }");
+        return(getApellidos() + " , " +  getNombre());
     }
 }
