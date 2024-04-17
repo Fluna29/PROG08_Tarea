@@ -27,7 +27,6 @@ public class Catalogo {
      */
     public Catalogo(){
         this.listadoLibros = new TreeMap<>();
-        iniciarLibrosPredefinidos();
     }
 
     /**
@@ -35,12 +34,12 @@ public class Catalogo {
      * en nuestro catálogo de manera automática, para que cada vez
      * que se inicialice el programa estén estos 5.
      */
-    private void iniciarLibrosPredefinidos(){
-        listadoLibros.put("9788437604947", new Libro("9788437604947", "Cien años de soledad", 1967, new Persona("Gabriel", "García Márquez"), "Novela", "- La historia de la familia Buendía en el pueblo ficticio de Macondo."));
-        listadoLibros.put("9788432217256", new Libro("9788432217256", "El amor en los tiempos del cólera", 1985, new Persona("Gabriel", "García Márquez"), "Novela", "- La historia de amor entre Florentino Ariza y Fermina Daza."));
-        listadoLibros.put("9788497932399", new Libro("9788497932399", "Don Quijote de la Mancha", 1605, new Persona("Miguel de", "Cervantes"), "Novela", "- Las aventuras de un hidalgo que se vuelve loco leyendo libros de caballería."));
-        listadoLibros.put("9788420655665", new Libro("9788420655665", "La casa de los espíritus", 1982, new Persona("Isabel", "Allende"), "Novela", "- La saga de la familia Trueba en un país latinoamericano ficticio."));
-        listadoLibros.put("9788408089454", new Libro("9788408089454", "El laberinto de los espíritus", 2016, new Persona("Carlos", "Ruiz Zafón"), "Novela", "- La última entrega de la saga del Cementerio de los Libros Olvidados.")); 
+    public void iniciarLibrosPredefinidos(){
+        listadoLibros.put("9788437604947", new Libro("9788437604947", "Cien años de soledad", 1967, new Persona("Gabriel", "García Márquez"), "Novela", "La historia de la familia Buendía en el pueblo ficticio de Macondo."));
+        listadoLibros.put("9788432217256", new Libro("9788432217256", "El amor en los tiempos del cólera", 1985, new Persona("Gabriel", "García Márquez"), "Novela", "La historia de amor entre Florentino Ariza y Fermina Daza."));
+        listadoLibros.put("9788497932399", new Libro("9788497932399", "Don Quijote de la Mancha", 1605, new Persona("Miguel de", "Cervantes"), "Novela", "Las aventuras de un hidalgo que se vuelve loco leyendo libros de caballería."));
+        listadoLibros.put("9788420655665", new Libro("9788420655665", "La casa de los espíritus", 1982, new Persona("Isabel", "Allende"), "Novela", "La saga de la familia Trueba en un país latinoamericano ficticio."));
+        listadoLibros.put("9788408089454", new Libro("9788408089454", "El laberinto de los espíritus", 2016, new Persona("Carlos", "Ruiz Zafón"), "Novela", "La última entrega de la saga del Cementerio de los Libros Olvidados.")); 
     }
 
     /**
@@ -52,18 +51,14 @@ public class Catalogo {
      */
     public boolean isbnExiste (String isbn){
 
-        if(listadoLibros.containsKey(isbn)){
-            return true;
-        }else{
-            return false;  
-        }
+        return listadoLibros.containsKey(isbn);
     }
 
     /**
      * Esta función nos devuelve un String con los datos de cada libro.
      * @return
      */
-    public String devolverListadoLibros(){
+    public void devolverListadoLibros(){
         
         StringBuilder datosLibros = new StringBuilder();
 
@@ -71,7 +66,7 @@ public class Catalogo {
             datosLibros.append(libro.toString()).append("\n");
         }
     
-        return datosLibros.toString();
+        System.out.println(datosLibros.toString());
     }
     
     /**
@@ -135,11 +130,9 @@ public class Catalogo {
             String respuesta = scanner.nextLine();
 
             if (respuesta.equalsIgnoreCase("s")) {
-                scanner.close();
                 listadoLibros.remove(isbn);
                 System.out.println("\nEl libro ha sido eliminado del catálogo.");
             } else {
-                scanner.close();
                 System.out.println("\nEl libro no ha sido eliminado del catálogo.");
             }
             
@@ -159,21 +152,21 @@ public class Catalogo {
     
         textoBusqueda = textoBusqueda.toLowerCase();
         boolean coincide = false;
-
+        
         for (Libro libro : listadoLibros.values()) {
             String tituloLibro = libro.getTitulo().toLowerCase();
 
             if (tituloLibro.contains(textoBusqueda)) {
                 
                 if (!coincide) {
-                    System.out.println("\nLibros que coinciden con '" + textoBusqueda + "':");
+                    System.out.println("\nLibros que coinciden con ' " + textoBusqueda + " ':\n");
                     coincide = true;
                 }
                 System.out.println(libro.toString());
             }
         }
         if (!coincide) {
-            System.out.println("\nNo se encontraron libros que coincidan con ' " + textoBusqueda + " '.");
+            System.out.println("\nNo se encontraron libros que coincidan con ' " + textoBusqueda + " '.\n");
         }
     } 
 
@@ -194,17 +187,20 @@ public class Catalogo {
             if (anyoLibro.equals(anyoBusqueda)) {
                 
                 if (!coincide) {
-                    System.out.println("\nLibros que hayan sido publicados en el año" + anyoBusqueda + ":");
+                    System.out.println("\nLibros que hayan sido publicados en el año " + anyoBusqueda + ":\n");
                     coincide = true;
                 }
                 System.out.println(libro.toString());
             }
         }
         if (!coincide) {
-            System.out.println("\nNo se encontraron libros que hayan sido publicados en el año " + anyoBusqueda + ".");
+            System.out.println("\nNo se encontraron libros que hayan sido publicados en el año " + anyoBusqueda + ".\n");
         }
     } 
     
+    /**
+     * Se mostrará un listado de libros igual al de la opción 1 pero ordenados alfabéticamente por título (sin tener en cuenta mayúsculas ni minúsculas).
+     */
     public void listaOrdenadaTitulo (){
         
         Comparator<Libro> comparador = (libro1, libro2) -> libro1.getTitulo().compareToIgnoreCase(libro2.getTitulo());
@@ -218,6 +214,10 @@ public class Catalogo {
         }
     }
 
+    /**
+     * Se mostrará un listado de libros igual al de la opción 1 pero ordenados por año de publicación de 
+     * menor a mayor y dentro de los libros publicados en el mismo año alfabéticamente por apellido y nombre del autor.
+     */
     public void listaOrdenadaAnyoAutor (){
         Comparator<Libro> comparador = (libro1, libro2) -> {
             

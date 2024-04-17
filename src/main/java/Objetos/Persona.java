@@ -1,13 +1,18 @@
 package Objetos;
 
 /**
- *
- * @author fluna
+ * Esta clase solamente tendrá 2 campos apellidos y nombre y servirá para poder crear al autor.
+ * @author Francisco Luna Raya
  */
 public class Persona {
     private String nombre;
     private String apellidos;
 
+    /**
+     * Inicializa el objeto Persona
+     * @param nombre
+     * @param apellidos
+     */
     public Persona (String nombre, String apellidos){
         this.nombre = nombre;
         this.apellidos = apellidos;
