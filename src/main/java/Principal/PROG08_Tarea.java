@@ -2,7 +2,6 @@ package Principal;
 
 import java.util.Scanner;
 
-import javax.swing.event.SwingPropertyChangeSupport;
 
 import Objetos.*;
 import Validadores.Validaciones;
